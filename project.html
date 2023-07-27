@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Weather Report</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <style>
+        .background{
+          background-size: 100%;
+          background-repeat: no-repeat;
+          background-attachment: fixed;  
+          background-image: url('sky-blue.jpeg');
+        }
+        .foot{
+          text-align: center;
+          padding: 3px;
+          background-color: white;
+          color: black;
+        }
+    </style>
+    <script>
+          function Fun1()
+          {
+              getweather("kochi");
+          }
+          function Fun2()
+          {
+              getweather("Rewari");
+          }
+          function Fun3()
+          {
+              getweather("kurukshetra");
+          }
+          function Fun4()
+          {
+              alert("You are on Home page");
+          }
+    </script>
+</head>
+  <body class="background">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand mx-2" href="#">Weather Web<span style="padding-right:3px; padding-top:3px; display:inline-block;"><img src="logo.png" width="40" height="30"></img></span></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" title="You are on Home page" onclick="Fun4()" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#bottom">About App</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Cities
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- <li><button type="button" class="btn btn-light">Light</button></li> -->
+                  <li><button type="button" class="btn btn-light" onclick="Fun1()">Kochi</button></li>
+                  <li><button type="button" class="btn btn-light" onclick="Fun2()">Rewari</button></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><button type="button" class="btn btn-light" onclick="Fun3()">Kurukshetra</button></li>
+                </ul>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" id="city" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit" id="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+      <h2 class="display-6 text-center mb-4"><span id="cityName"></span> City Weather</h2>
+    <div class="container">
+        <main>
+            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+              <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm">
+                  <div class="card-header py-3">
+<h4 class="my-0 fw-normal">Temperature <span style="padding-right:3px; padding-top:3px; display:inline-block;"><img src="temp_logo.jpeg" width="70" height="70"></img></span></h4>
+                  </div>
+                  <div class="card-body">
+                    <h1 class="card-title pricing-card-title"><span id = "temp1"></span><small class="text-body-secondary fw-light"><span>&#8451;</span></small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Temp : <span id = "temp"></span><small class="text-body-secondary fw-light"><span>&#8451;</span></small></li>
+                        <li>Max_temp : <span id = "max_temp"></span><small class="text-body-secondary fw-light"><span>&#8451;</span></small></li>
+                        <li>Min_temp : <span id = "min_temp"></span><small class="text-body-secondary fw-light"><span>&#8451;</span></small></li>
+                        <li>Feels_like : <span id = "feels_like"></span><small class="text-body-secondary fw-light"><span>&#8451;</span></small></li>
+                    </ul>
+                    <!-- <button type="button" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</button> -->
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm">
+                  <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal">Wind <span style="padding-right:3px; padding-top:3px; display:inline-block;"><img src="wind.jpeg" width="70" height="70"></img></span></h4>
+                  </div>
+                  <div class="card-body">
+                    <h1 class="card-title pricing-card-title"><span id = "wind_speed1"></span><small class="text-body-secondary fw-light">m/s</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                      <li>Wind_speed : <span id = "wind_speed"></span><small class="text-body-secondary fw-light">m/s</small></li> 
+                      <li>Wind_degrees : <span id = "wind_degrees"></span><small class="text-body-secondary fw-light">º</small></li>
+                      <li>Cloud_pct : <span id = "cloud_pct"></span></li>
+                      <li>Humidity : <span id = "humidity"></span><small class="text-body-secondary fw-light">g.m-3</small></li>
+                    </ul>
+                    <!-- <button type="button" class="w-100 btn btn-lg btn-primary">Get started</button> -->
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm border-primary">
+                  <div class="card-header py-3 text-bg-primary border-primary">
+                    <h4 class="my-0 fw-normal">Sun timings</h4>
+                  </div>
+                  <div class="card-body">
+                    <h1 class="card-title pricing-card-title" ><span id='date-time' ></span></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Sunrise : <span id="sunrise"></span></li>
+                        <li>Sunset : <span id="sunset"></span></li>
+                    </ul>
+                    <!-- <button type="button" class="w-100 btn btn-lg btn-primary">Contact us</button> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+        <hr height="5px" >
+            <h2 class="display-6 text-center mb-4">India's Major Cities Weather</h2>
+        
+            <div class="table-responsive">
+              <table class="table text-center">
+                <thead>
+                  <tr>
+                    <th style="width: 34%;"></th>                    
+                    <th style="width: 22%;">Cloud_pct</th>
+                    <th style="width: 22%;">Feels_like</th>
+                    <th style="width: 22%;">Humidity</th>
+                    <th style="width: 22%;">Max_temp</th>
+                    <th style="width: 22%;">Min_temp</th>
+                    <th style="width: 35%;">Sunrise</th>
+                    <th style="width: 35%;">Sunset</th>
+                    <th style="width: 22%;">Temp</th>
+                    <th style="width: 22%;">Wind_degrees</th>
+                    <th style="width: 22%;">Wind_speed</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row" class="text-start">New Delhi</th>
+                    <td><span id="cloud_pct2"></span></td>
+                    <td><span id="feels_like2"></span><small class="text-body-secondary fw-light"><span>&#8451;</span></small></td>
+                    <td><span id="humidity2"></span><small class="text-body-secondary fw-light">g.m-3</small></td>
+                    <td><span id="max_temp2"></span><small class="text-body-secondary fw-light"><span>&#8451;</span></small></td>
+                    <td><span id="min_temp2"></span><small class="text-body-secondary fw-light"><span>&#8451;</span></small></td>
+                    <td><span id="sunrise2"></span></td>
+                    <td><span id="sunset2"></span></td>
+                    <td><span id="temp2"></span><small class="text-body-secondary fw-light"><span>&#8451;</span></small></td>
+                    <td><span id="wind_degrees2"></span><small class="text-body-secondary fw-light">º</small></td>
+                    <td><span id="wind_speed2"></span><small class="text-body-secondary fw-light">m/s</small></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="text-start">kolkata</th>
+                    <td><span id="cloud_pct3"></span></td>
+                    <td><span id="feels_like3"></span><small class="text-body-secondary fw-light"><span>&#8451;</span></small></td>
+                    <td><span id="humidity3"></span><small class="text-body-secondary fw-light">g.m-3</small></td>
+                    <td><span id="max_temp3"></span><small class="text-body-secondary fw-light"><span>&#8451;</span></small></td>
+                    <td><span id="min_temp3"></span><small class="text-body-secondary fw-light"><span>&#8451;</span></small></td>
+                    <td><span id="sunrise3"></span></td>
+                    <td><span id="sunset3"></span></td>
+                    <td><span id="temp3"></span><small class="text-body-secondary fw-light"><span>&#8451;</span></small></td>
+                    <td><span id="wind_degrees3"></span><small class="text-body-secondary fw-light">º</small></td>
+                    <td><span id="wind_speed3"></span><small class="text-body-secondary fw-light">m/s</small></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                  </tr>
+                </tbody>
+        
+                <tbody>
+                  <tr>
+                    <th scope="row" class="text-start">Chennai</th>
+                    <td><span id="cloud_pct4"></span></td>
+                    <td><span id="feels_like4"></span><small class="text-body-secondary fw-light"><span>&#8451;</span></small></td>
+                    <td><span id="humidity4"></span><small class="text-body-secondary fw-light">g.m-3</small></td>
+                    <td><span id="max_temp4"></span><small class="text-body-secondary fw-light"><span>&#8451;</span></small></td>
+                    <td><span id="min_temp4"></span><small class="text-body-secondary fw-light"><span>&#8451;</span></small></td>
+                    <td><span id="sunrise4"></span></td>
+                    <td><span id="sunset4"></span></td>
+                    <td><span id="temp4"></span><small class="text-body-secondary fw-light"><span>&#8451;</span></small></td>
+                    <td><span id="wind_degrees4"></span><small class="text-body-secondary fw-light">º</small></td>
+                    <td><span id="wind_speed4"></span><small class="text-body-secondary fw-light">m/s</small></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="text-start">Mumbai</th>
+                    <td><span id="cloud_pct5"></span></td>
+                    <td><span id="feels_like5"></span><small class="text-body-secondary fw-light"><span>&#8451;</span></small></td>
+                    <td><span id="humidity5"></span><small class="text-body-secondary fw-light">g.m-3</small></td>
+                    <td><span id="max_temp5"></span><small class="text-body-secondary fw-light"><span>&#8451;</span></small></td>
+                    <td><span id="min_temp5"></span><small class="text-body-secondary fw-light"><span>&#8451;</span></small></td>
+                    <td><span id="sunrise5"></span></td>
+                    <td><span id="sunset5"></span></td>
+                    <td><span id="temp5"></span><small class="text-body-secondary fw-light"><span>&#8451;</span></small></td>
+                    <td><span id="wind_degrees5"></span><small class="text-body-secondary fw-light">º</small></td>
+                    <td><span id="wind_speed5"></span><small class="text-body-secondary fw-light">m/s</small></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                    <td><svg class="bi" width="24" height="24"><use xlink:href="#check"></use></svg></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </main>
+    </div>  
+    <footer class="foot">
+      <a name="bottom" id="bottom"></a>
+      <p>=> The Weather Forecast App is your gateway to staying informed about the ever-changing weather conditions in your region and beyond. Designed with a user-friendly interface and cutting-edge weather data, this app aims to empower you with accurate and up-to-date weather information, helping you make informed decisions for your daily activities and adventures.</p>
+      <hr>
+      <p>©2023 Copyrights: yadavhitesh<br>
+      <a href="yadavhitesh335@gmail.com">yadavhitesh335@gmail.com</a></p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
